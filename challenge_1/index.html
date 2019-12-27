@@ -4,11 +4,23 @@
     <title></title>
   </head>
   <body>
+    <div id = "initialGame">
+      player X name: <input type="text" id = "player-one-inpt" />
+      player Y name: <input type="text" id = "player-two-inpt" />
+      <button id = 'start-btn' >Start</button>
+    </div>
+    <div id = "playerx"></div>
+    <div id = "playero"></div>
     <div id = "board">
     </div>
+    <div id = ""></div>
+    <script src="./helpers/checkWinner.js"></script>
+    <script src="./helpers/checkTie.js"></script>
     <script src="./Board.js"></script>
     <script src="./Player.js"></script>
     <script src="./Game.js"></script>
+    <script src="./helpers/startNewGame.js"></script>
+    <script src="./helpers/players.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
