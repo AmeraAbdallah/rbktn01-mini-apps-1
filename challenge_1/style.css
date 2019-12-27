@@ -1,0 +1,42 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  margin: 30px auto;
+  text-align: center;
+}
+
+input {
+  display: block;
+  padding: 5px;
+  margin: 10px auto;
+  font-size: 18px;
+}
+
+#initialGame {
+  color:#282828;
+  width: 100%;
+}
+
+button {
+  display: block;
+  padding: 5px;
+  margin: 10px auto;
+  font-size: 18px;
+  background-color: #282828;
+  border: none;
+  color: #fff;
+  width: 100px;
+}
+
+table {
+  margin: 20px auto;
+}
+
+td {
+  padding: 10px;
+  font-size: large;
+  border: .5px solid #ccc;
+}
+
