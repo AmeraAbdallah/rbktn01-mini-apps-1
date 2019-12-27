@@ -21,3 +21,11 @@ Board.prototype.createBoard = function(){
 Board.prototype.checkAvailble = function(index){
   return document.getElementById(index).innerText == 0;
 }
+
+Board.prototype.init = function(){
+  for(let i = 0; i < 3; i ++){
+    for(let j = 0; j < 3; j++){
+      document.getElementById(`${i}${j}`).innerHTML = '0';
+    }
+  }
+}
