@@ -1,7 +1,7 @@
-function Game(playerX, playerY){
+function Game(playerX, playerO){
 
   this.playerX = playerX;
-  this.playerY = playerY;
+  this.playerO = playerO;
   this.turn = playerX;
   this.lastWinner = null;
 }
@@ -11,10 +11,9 @@ Game.prototype.setLastWinner = function(player){
 }
 
 Game.prototype.switchTurn = function(){
-  this.turn = (this.turn === this.playerX) ? this.playerY : this.playerX;
+  this.turn = (this.turn === this.playerX) ? this.playerO : this.playerX;
 }
 
 Game.prototype.play = function(index){
   document.getElementById(index).textContent = this.turn.element;
-  this.switchTurn();
 }

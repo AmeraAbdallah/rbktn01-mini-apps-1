@@ -5,6 +5,6 @@ function Player(name, element) {
   this.points = 0;
 }
 
-Player.prototype.addPoint = () => {
+Player.prototype.addPoint = function(){
   return ++this.points;
 }
