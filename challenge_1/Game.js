@@ -3,11 +3,6 @@ function Game(playerX, playerO){
   this.playerX = playerX;
   this.playerO = playerO;
   this.turn = playerX;
-  this.lastWinner = null;
-}
-
-Game.prototype.setLastWinner = function(player){
-  this.lastWinner = payer;
 }
 
 Game.prototype.switchTurn = function(){
