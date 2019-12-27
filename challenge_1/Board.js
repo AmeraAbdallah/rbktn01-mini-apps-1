@@ -2,7 +2,7 @@ function Board() {
 
 }
 
-Board.prototype.createBoard = () => {
+Board.prototype.createBoard = function(){
   let board = document.createElement('table');
   for(let i = 0; i < 3; i ++){
     let row = document.createElement('tr');
@@ -10,10 +10,14 @@ Board.prototype.createBoard = () => {
       let col = document.createElement('td');
       let txtNode = document.createTextNode('0');
       col.appendChild(txtNode);
-      col.setAttribute('data-index', `${i}${j}`);
+      col.id = (`${i}${j}`);
       row.appendChild(col);
     }
     board.appendChild(row);
   }
   document.getElementById('board').appendChild(board);
+}
+
+Board.prototype.checkAvailble = function(index){
+  return document.getElementById(index).innerText == 0;
 }
