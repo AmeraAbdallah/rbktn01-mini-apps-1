@@ -1,0 +1,21 @@
+{
+  "name": "multistep_checkout_experience",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start-server": "nodemon server.js",
+    "start": "live-server --open=./public/index.html --port=3000",
+    "build": "./node_modules/.bin/babel client --out-dir public --presets @babel/preset-react --source-maps inline --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
