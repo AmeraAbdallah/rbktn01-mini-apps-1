@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const Purchase = require('./db/models/purchase');
 
 let app = express();
 app.use(express.static('public'));
@@ -16,19 +18,15 @@ app.get('/', (req, res) => {
     res.sendFile('/index.html');
 });
 
-app.post('/form1', (req, res) => {
+app.post('/purchase', (req, res) => {
     console.log(req.body);
-    res.send();
+    let p = new Purchase(req.body);
+    p.save().then((data) => {
+        console.log('saved');
+        res.send();
+    }).catch(err => console.log(err))
 });
 
-app.post('/form2', (req, res) => {
-    console.log(req.body);
-    res.send();
+mongoose.connect('mongodb://localhost:27017/checkout', {useNewUrlParser: true}).then(() => {
+    app.listen(8080, () => console.log('listning to port 8080'))
 });
-
-app.post('/form3', (req, res) => {
-    console.log(req.body);
-    res.send();
-});
-
-app.listen(8080, () => console.log('listning to port 8080'))

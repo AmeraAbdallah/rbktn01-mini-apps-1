@@ -92,19 +92,19 @@ class Form2 extends React.Component{
                 this.props.onNext(this.state);
             }}>
                 <div>
-                    <input required type = 'text' placeholder = 'Ship Address Lin1'/>
+                    <input required type = 'text' placeholder = 'Ship Address Lin1' onChange={(event) => this.onChangeAddress1(event)} />
                 </div>
                 <div>
-                    <input type = 'text' placeholder = 'Ship Address Line 2'/>
+                    <input type = 'text' placeholder = 'Ship Address Line 2' onChange={(event) => this.onChangeAddress2(event)} />
                 </div>
                 <div>
-                    <input required type = 'text' placeholder = 'State'/>
+                    <input required type = 'text' placeholder = 'State' onChange={(event) => this.onChangeState(event)} />
                 </div>
                 <div>
-                    <input required type = 'text' placeholder = 'Zip Code'/>
+                    <input required type = 'text' placeholder = 'Zip Code' onChange={(event) => this.onChangeZipCode(event)} />
                 </div>
                 <div>
-                    <input required type = 'text' placeholder = 'Phone Number'/>
+                    <input required type = 'text' placeholder = 'Phone Number' onChange={(event) => this.onChangePhoneNumber(event)} />
                 </div>
                 <button>Next</button>
             </form>
@@ -154,16 +154,16 @@ class Form3 extends React.Component{
                 this.props.onNext(this.state);
             }}>
                 <div>
-                    <input required type = 'text' placeholder = 'Credit Card Number'/>
+                    <input required type = 'text' placeholder = 'Credit Card Number' onChange={(event) => this.onChangeCreditCardNumber(event)} />
                 </div>
                 <div>
-                    <input required type = 'text' placeholder = 'expiry date'/>
+                    <input required type = 'text' placeholder = 'expiry date' onChange={(event) => this.onChangeExpiryDate(event)} />
                 </div>
                 <div>
-                    <input required type = 'text' placeholder = 'CVV'/>
+                    <input required type = 'text' placeholder = 'CVV' onChange={(event) => this.onChangeCvv(event)} />
                 </div>
                 <div>
-                    <input type = 'text' placeholder = ' billing zip code'/>
+                    <input type = 'text' placeholder = ' billing zip code' onChange={(event) => this.onChangeBillingZipCode(event)} />
                 </div>
                 <button>Next</button>
             </form>
@@ -175,70 +175,77 @@ function Purchase (props){
     return(
         <div>
             summery
-            <button>Purchase</button>
+            <button onClick = {props.onConfirm}>Purchase</button>
         </div>
     ) 
 }
-
-// import Form1 from './form1';
-// import Form2 from './form2';
-// import Form3 from './form3';
-// import Purchase from './Purchase';
 
 class App extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            step: 1
+            step: 1,
+            name: '',
+            email: '',
+            password: '',
+            address1: '',
+            address2: '',
+            state: '',
+            zipCode: '',
+            phoneNumber: '',
+            creditCardNumber: '',
+            expiryDate: '',
+            cvv: '',
+            billingZipCode: ''
         };
         this.form1 = this.form1.bind(this);
         this.form2 = this.form2.bind(this);
-        this.form3 = this.form3.bind(this)
+        this.form3 = this.form3.bind(this);
+        this.purchase = this.purchase.bind(this);
     }
 
     form1(data){
-         fetch('http://localhost:8080/form1', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-        }).then( response => {
-            console.log(response);
-            this.setState(()=>({step: 2}));
-        }).catch(err => {
-            console.log(err);
-        })
+        this.setState(() => ({
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            step: 2
+        }))
     }
 
     form2(data){
-        fetch('http://localhost:8080/form2', {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json'
-             },
-             body: JSON.stringify(data)
-       }).then( response => {
-           console.log(response);
-           this.setState(()=>({step: 3}));
-       }).catch(err => {
-           console.log(err);
-       })
+        this.setState(() => ({
+            address1: data.address1,
+            address2: data.address2,
+            state: data.state,
+            zipCode: data.zipCode,
+            phoneNumber: data.phoneNumber,
+            step: 3
+        }))
    }
 
    form3(data){
-        fetch('http://localhost:8080/form3', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-    }).then( response => {
-        console.log(response);
-        this.setState(()=>({step: 4}));
-    }).catch(err => {
-        console.log(err);
-    })
+        this.setState(() => ({
+            creditCardNumber: data.creditCardNumber,
+            expiryDate: data.expiryDate,
+            cvv: data.cvv,
+            billingZipCode: data.billingZipCode,
+            step: 4
+        }))
+    }
+
+    purchase(){
+        fetch('http://localhost:8080/purchase', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.state)
+        }).then( response => {
+            console.log(response);
+        }).catch(err => {
+            console.log(err);
+        })
     }
     
     render(){
@@ -246,7 +253,7 @@ class App extends React.Component{
         (<Form1 onNext = {this.form1} />) :
         this.state.step === 2 ? (<Form2 onNext = {this.form2}/>) : 
         this.state.step === 3 ?(<Form3 onNext = {this.form3}/>) :
-        (<Purchase/>);
+        (<Purchase onConfirm = {this.purchase} />);
 
         return(
             Form
